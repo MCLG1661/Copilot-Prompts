@@ -1,6 +1,6 @@
-# 🧭 Mentor de Carreira em Tecnologia - Baseado em 2 Agentes Especializados
+# 🧭 Mentor de Carreira em Tecnologia
 
-*Mentor de Carreira em Tecnologia baseado em dois agentes especializados*
+*Protótipo de sistema multiagente baseado em Prompt Engineering para apoiar a exploração e o planejamento de carreiras em tecnologia.*
 
 ![Prompt Engineering](https://img.shields.io/badge/AI-Prompt%20Engineering-8A2BE2)
 ![AI Agents](https://img.shields.io/badge/AI-Agent%20Design-412991)
@@ -9,320 +9,278 @@
 ![DIO](https://img.shields.io/badge/DIO-CI%26T%20Bootcamp-5A0FC8)
 ![Status](https://img.shields.io/badge/Status-Protótipo-blue)
 
-O **AI Career Mentor** é um protótipo de sistema baseado em agentes de IA criado
-para apoiar decisões relacionadas à carreira em tecnologia.
-
-A solução utiliza **Prompt Engineering e separação de responsabilidades entre
-agentes especializados** para estruturar um processo de mentoria em duas etapas:
-
-**Diagnóstico do perfil → Planejamento de carreira**
-
-O projeto foi desenvolvido durante o curso **Introdução à Engenharia de Prompt**,
-integrante do Bootcamp **CI&T — Do Prompt ao Agente**, da DIO.
-
 ---
 
-## 🎯 Objetivo
+## 🎯 Visão Geral
 
-Construir um sistema de mentoria capaz de :
+O **Mentor de Carreira em Tecnologia** é um projeto de Inteligência Artificial Generativa que explora a divisão de um problema complexo entre **dois agentes especializados**.
 
-- Compreender o perfil do usuário
-- Identificar interesses profissionais
-- Considerar experiência e conhecimentos atuais
-- Avaliar disponibilidade para aprendizado
-- Identificar áreas de interesse
-- Sugerir possíveis caminhos profissionais
-- Estruturar um roadmap de desenvolvimento
-- Propor ações para evolução profissional
+O sistema foi concebido para transformar uma conversa inicial sobre experiência, competências, interesses e objetivos profissionais em um **perfil estruturado** e, posteriormente, em recomendações e um roadmap de desenvolvimento.
 
-O foco do projeto está no **design dos agentes e na engenharia das instruções**,
-e não na implementação de uma aplicação automatizada.
-
----
-
-## 🧠 Conceito
-
-Em vez de utilizar um único prompt para executar todo o processo, o sistema divide
-a tarefa entre **dois agentes especializados**.
+O fluxo é dividido em duas responsabilidades:
 
 ```text
 Usuário
    ↓
-🧩 Agente Entrevistador
+Agente 1 — Entrevistador de Carreira
    ↓
-Coleta estruturada de informações
+Perfil Profissional Estruturado
    ↓
-Perfil do Usuário
+Handoff de Contexto
    ↓
-🧠 Agente Planejador
+Agente 2 — Planejador de Carreira
    ↓
-Análise do Perfil
-   ↓
-Recomendações
-   ↓
-Roadmap de Carreira
+Recomendações + Roadmap
 ```
 
-Essa separação permite que cada agente tenha **objetivo, responsabilidade, entrada
-e saída claramente definidos**.
+> **Importante:** nesta versão, o workflow entre os agentes é conceitual. Não existe ainda uma aplicação que automatize a execução e o handoff entre os agentes.
 
 ---
 
-## 🏗️ Arquitetura Visual
+## 💡 Problema
 
-A arquitetura organiza o processo de mentoria em dois agentes especializados,
-com responsabilidades distintas e transferência estruturada de contexto entre as etapas.
+Escolher uma trajetória em tecnologia pode ser difícil quando diferentes fatores precisam ser considerados simultaneamente:
 
-<img width="800" height="400" alt="ChatGPT Image 12 de ago  de 2026, 18_46_24" src="https://github.com/user-attachments/assets/4120049e-7aa7-4901-a924-74334a9e07c9" />
+- experiência profissional anterior;
+- conhecimentos técnicos;
+- competências transferíveis;
+- interesses;
+- disponibilidade para estudo;
+- objetivos profissionais;
+- lacunas de conhecimento.
 
-O fluxo parte da coleta estruturada de informações pelo **Agente Entrevistador**,
-passa pela construção do **Perfil Estruturado** e segue para o **Agente Planejador**,
-responsável pela geração do plano de desenvolvimento profissional.
-
----
-
-## Arquitetura dos Agentes
-
-A solução foi estruturada em dois agentes especializados, cada um responsável por uma etapa específica do processo de mentoria.
-
-🧩 Agente 1 — Entrevistador de Carreira
-
-Responsável pela etapa de **descoberta e diagnóstico do perfil profissional**.
-
-O agente conduz uma entrevista estruturada para identificar:
-
-- Interesses profissionais
-- Experiência atual
-- Conhecimentos e preferências
-- Disponibilidade para estudo
-- Objetivos de carreira
-- Áreas de interesse
-
-Ao final, gera um **perfil estruturado** que será utilizado pelo segundo agente.
-
-➡️ [**Ver Prompt Completo do Agente Entrevistador**](prompts/AGENTE-1-Entrevistador-de-Carreira.md)
-
-🧠 Agente 2 — Planejador de Carreira
-
-Responsável por transformar o perfil estruturado em um **plano de desenvolvimento profissional**.
-
-O agente:
-
-- Identifica as três carreiras mais adequadas
-- Prioriza as possibilidades
-- Analisa vantagens e desafios
-- Detalha a carreira Top 1
-- Estrutura um roadmap de 120 dias
-- Sugere um projeto de portfólio
-- Apoia a preparação para entrevistas
-
-➡️ [**Ver Prompt Completo do Agente Planejador**](prompts/AGENTE-2-Planejador-de-Carreira.md)
+Em vez de utilizar um único prompt para executar todo o processo, o projeto separa o problema em **duas etapas especializadas**.
 
 ---
 
-## ⚙️ Princípios de Design
+## 🤖 Arquitetura Multiagente
 
-1. Separação de Responsabilidades 
+### Agente 1 — Entrevistador de Carreira
 
-Cada agente executa uma função específica:
+Responsável pela etapa de descoberta.
 
-**Entrevistador → coleta e estrutura**
-
-**Planejador → analisa e recomenda**
-
-2. Contexto Estruturado
-
-O resultado da primeira etapa é utilizado como contexto para a segunda, reduzindo
-a necessidade de o agente planejador reconstruir todas as informações.
-
-3. Modularidade
-
-A arquitetura permite que os agentes sejam modificados ou reutilizados
-individualmente.
-
-4. Extensibilidade
-
-Novos agentes poderiam ser incorporados posteriormente:
+Seu objetivo é conduzir uma entrevista estruturada e transformar as respostas em um perfil profissional organizado.
 
 ```text
-Entrevistador
-     ↓
-Planejador
-     ↓
-Avaliador Técnico
-     ↓
-Gerador de Roadmap
-     ↓
-Preparador de Entrevistas
+Perguntar → Explorar → Identificar → Estruturar
 ```
 
+Principais dimensões analisadas:
+
+- experiência profissional;
+- conhecimentos técnicos;
+- interesses;
+- objetivos;
+- disponibilidade;
+- pontos fortes;
+- lacunas de competências.
+
+📄 [Ver prompt do Agente 1](prompts/AGENTE-1-Entrevistador-de-Carreira.md)
+
 ---
 
-## 🧪 Exemplo Conceitual
+### Agente 2 — Planejador de Carreira
 
-Perfil
+Recebe o perfil estruturado produzido na etapa anterior e utiliza esse contexto para analisar possíveis trajetórias.
 
 ```text
-Interesse principal: Dados
-Nível: Iniciante / Intermediário
-Disponibilidade: 4 horas por semana
-Objetivo: Transição de carreira
-Interesse adicional: Inteligência Artificial
+Analisar → Priorizar → Recomendar → Planejar
 ```
 
-Possíveis caminhos avaliados
+Entre suas responsabilidades estão:
+
+- avaliar aderência a diferentes carreiras;
+- priorizar alternativas;
+- justificar recomendações;
+- identificar competências a desenvolver;
+- estruturar um roadmap;
+- sugerir projetos de portfólio;
+- apoiar preparação profissional.
+
+📄 [Ver prompt do Agente 2](prompts/AGENTE-2-Planejador-de-Carreira.md)
+
+---
+
+## 🔄 Handoff de Contexto
+
+Um dos conceitos centrais do projeto é a passagem de contexto entre agentes.
+
+O primeiro agente não entrega apenas uma resposta textual genérica. Ele organiza as informações relevantes para que possam funcionar como entrada da próxima etapa.
 
 ```text
-→ Analista de Dados
-→ Cientista de Dados
-→ Machine Learning
+ENTREVISTA
+    │
+    ▼
+PERFIL ESTRUTURADO
+    │
+    ▼
+HANDOFF
+    │
+    ▼
+PLANEJAMENTO
 ```
 
-A partir dessas informações, o agente planejador estrutura recomendações e um
-possível caminho de desenvolvimento.
-
-> As recomendações produzidas pelo modelo devem ser interpretadas como apoio à
-> reflexão e planejamento, e não como garantia de adequação ou resultado profissional.
+Essa abordagem demonstra como a **separação de responsabilidades** pode tornar workflows baseados em LLMs mais claros e controláveis.
 
 ---
 
-## 🛠️ Conceitos Aplicados
+## 🧪 Demonstração Completa
 
-**Prompt Engineering** - Estruturação das instruções dos agentes
+O repositório inclui uma simulação fictícia de ponta a ponta mostrando:
 
-**Agent Design** - Definição de responsabilidades
+1. perfil inicial;
+2. entrevista;
+3. saída estruturada do Agente 1;
+4. handoff;
+5. análise do Agente 2;
+6. alternativas de carreira;
+7. recomendação principal;
+8. roadmap de 120 dias;
+9. projeto de portfólio;
+10. preparação para entrevistas.
 
-**Context Engineering** - Transferência estruturada de informações
+➡️ **[Ver demonstração completa do fluxo multiagente](examples/demo-fluxo-completo.md)**
 
-**Generative AI** - Geração e análise das respostas
-
-**Decision Support** - Apoio ao planejamento
-
-**Modular Design** - Separação das etapas do sistema
+A demonstração é fictícia e possui finalidade exclusivamente educacional.
 
 ---
 
-## 📂 Estrutura Atual
+## 🧠 Conceitos Aplicados
+
+O projeto explora conceitos relacionados à construção de soluções com IA Generativa:
+
+### Prompt Engineering
+
+Definição estruturada de:
+
+- papel do agente;
+- objetivo;
+- contexto;
+- instruções;
+- restrições;
+- formato esperado de saída.
+
+### Agent Design
+
+Divisão do problema entre agentes com responsabilidades específicas.
+
+### Context Engineering
+
+Organização das informações relevantes para utilização pela etapa seguinte.
+
+### Structured Outputs
+
+Transformação de uma conversa em uma representação estruturada e reutilizável.
+
+### Handoff
+
+Transferência do resultado de um agente para outro dentro de um workflow.
+
+### Decomposição de Tarefas
+
+Separação de um problema amplo em etapas menores e especializadas.
+
+---
+
+## 📂 Estrutura do Repositório
 
 ```text
-Copilot-Prompts/
+Mentor-de-Carreira/
 │
 ├── prompts/
 │   ├── AGENTE-1-Entrevistador-de-Carreira.md
 │   └── AGENTE-2-Planejador-de-Carreira.md
 │
-├── imagem-da-arquitetura.png
+├── examples/
+│   └── demo-fluxo-completo.md
 │
 └── README.md
 ```
 
-Agente 1
+### `prompts/`
 
-`AGENTE 1 - Entrevistador de Carreira em Tecnologia.docx`
+Contém as instruções dos dois agentes.
 
-Contém a estrutura do agente responsável pela entrevista e diagnóstico.
+### `examples/`
 
-Agente 2
-
-`AGENTE 2 - Planejador de Carreira em Tecnologia.docx`
-
-Contém a estrutura do agente responsável pela análise e planejamento.
+Contém uma demonstração fictícia do funcionamento completo do workflow.
 
 ---
 
-## 💡 Competências Demonstradas
+## ▶️ Como Explorar o Projeto
 
-- Prompt Engineering
-- Generative AI
-- AI Agent Design
-- Context Engineering
-- Decomposição de problemas
-- Estruturação de prompts
-- Design de fluxos conversacionais
-- Sistemas de apoio à decisão
-- Arquitetura modular de agentes
-- GitHub
+Como esta versão é baseada em Prompt Engineering e não possui uma aplicação automatizada, os prompts podem ser estudados ou testados individualmente em um modelo de linguagem compatível.
+
+Fluxo conceitual:
+
+```text
+1. Executar o prompt do Agente 1
+              ↓
+2. Realizar a entrevista
+              ↓
+3. Obter o perfil estruturado
+              ↓
+4. Fornecer o perfil ao Agente 2
+              ↓
+5. Gerar análise e planejamento
+```
+
+Para compreender o comportamento esperado sem executar os prompts, consulte a **demonstração completa** disponível em `examples/`.
 
 ---
 
-## 🚀 Possíveis Evoluções
+## 🚀 Possível Evolução
 
-O protótipo pode evoluir para uma aplicação completa incorporando:
-
-- Interface web
-- Streamlit
-- Integração com API de LLM
-- Automação do fluxo entre agentes
-- Persistência do perfil
-- Scoring de competências
-- Avaliação técnica
-- Geração automática de roadmap
-- Recomendações de cursos
-- Análise de currículo
-- Preparação para entrevistas
-- Histórico de evolução
-- Avaliação das respostas dos agentes
-
-Uma arquitetura futura poderia assumir o formato:
+Uma próxima versão poderia transformar o protótipo em uma aplicação automatizada:
 
 ```text
 Interface
-   ↓
-Orquestrador
-   ↓
-Entrevistador
-   ↓
-Perfil estruturado
-   ↓
-Planejador
-   ↓
-Ferramentas / Bases externas
-   ↓
-Plano de desenvolvimento
+    ↓
+Agente Entrevistador
+    ↓
+Structured Output
+    ↓
+Orquestração
+    ↓
+Agente Planejador
+    ↓
+Roadmap
 ```
 
----
+Possíveis evoluções incluem:
 
-## ⚠️ Escopo
-
-Este projeto é um **protótipo baseado em Prompt Engineering**.
-
-A arquitetura representa conceitualmente um sistema de agentes, mas o fluxo entre
-os agentes **não está automatizado por software nesta versão**.
-
-O projeto tem finalidade educacional e demonstrativa.
-
----
-
-## 🎓 Contexto Acadêmico
-
-Projeto desenvolvido no curso **Introdução à Engenharia de Prompt**, integrante
-do Bootcamp:
-
-**CI&T — Do Prompt ao Agente | DIO**
-
-O desafio teve como foco a aplicação prática de conceitos de Prompt Engineering
-na construção de soluções estruturadas com Inteligência Artificial Generativa.
+- interface web;
+- integração com API de LLM;
+- automação do handoff;
+- persistência do perfil;
+- histórico de sessões;
+- geração estruturada de roadmap;
+- exportação do plano;
+- acompanhamento da evolução do usuário.
 
 ---
 
-## 🤝 Como Contribuir
+## ⚠️ Limitações
 
-Contribuições são bem-vindas especialmente nas áreas de:
+Este projeto possui finalidade **educacional e experimental**.
 
-- Prompt Engineering
-- Agent Design
-- Context Engineering
-- Avaliação de prompts
-- Automação de agentes
-- UX conversacional
+As recomendações produzidas por modelos de linguagem:
 
-1. Faça um Fork do projeto
-2. Crie uma branch para sua melhoria
-3. Implemente e documente a alteração
-4. Faça o commit
-5. Envie a branch
-6. Abra um Pull Request
+- não constituem avaliação profissional definitiva;
+- não substituem orientação especializada;
+- podem conter erros ou vieses;
+- dependem da qualidade das informações fornecidas;
+- não garantem contratação, transição profissional ou resultados específicos.
+
+O projeto deve ser entendido como uma demonstração de **arquitetura de prompts e workflow com agentes**, e não como um serviço profissional automatizado de orientação de carreira.
+
+---
+
+## 🎓 Contexto
+
+Projeto desenvolvido no contexto do **Bootcamp CI&T — Do Prompt ao Agente**, em parceria com a **DIO**, explorando a aplicação prática de Prompt Engineering e construção conceitual de agentes de IA.
+
+O projeto foi posteriormente organizado e documentado como case de portfólio.
 
 ---
 
@@ -330,13 +288,15 @@ Contribuições são bem-vindas especialmente nas áreas de:
 
 **Marcus Guedes**
 
-Marketing | Data Science | Inteligência Artificial | Gestão de Projetos
+Projetos em **Data Analytics, Inteligência Artificial aplicada a Negócios, Gestão e Tecnologia**.
 
-GitHub: MCLG1661  
-
-LinkedIn: Marcus Guedes
+- [GitHub](https://github.com/MCLG1661)
+- [LinkedIn](https://www.linkedin.com/in/marcusguedes/)
 
 ---
 
-🤖 **Do prompt ao agente: estruturando IA Generativa para apoiar decisões de carreira.**
+## 📌 Status
 
+**Protótipo conceitual concluído.**
+
+A arquitetura, os prompts e o fluxo demonstrativo estão documentados. A automação entre os agentes permanece como possibilidade de evolução futura.
