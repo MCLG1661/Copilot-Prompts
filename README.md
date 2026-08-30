@@ -5,7 +5,7 @@
 ![Prompt Engineering](https://img.shields.io/badge/AI-Prompt%20Engineering-8A2BE2)
 ![AI Agents](https://img.shields.io/badge/AI-Agent%20Design-412991)
 ![Generative AI](https://img.shields.io/badge/Generative%20AI-Career%20Mentor-6C63FF)
-![GitHub Copilot](https://img.shields.io/badge/GitHub-Copilot-000000?logo=githubcopilot&logoColor=white)
+![GitHub Copilot](https://img.shields.io/badge/GitHub-Copilot-000000?logo=githubcopilot&logoColor=white) 
 ![DIO](https://img.shields.io/badge/DIO-CI%26T%20Bootcamp-5A0FC8)
 ![Status](https://img.shields.io/badge/Status-Protótipo-blue)
 
